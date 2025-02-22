@@ -87,7 +87,6 @@ function openImage(cardData) {
   imagePopup.alt = cardData.alt;
   captionPopup.textContent = cardData.alt;
   openPopup(image);
-  console.log(imagePopupClose);
   imagePopupClose.addEventListener("click", () => {
     closePopup(image);
   });
