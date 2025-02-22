@@ -14,6 +14,10 @@ const formNewPlace = document.forms["new-place"];
 const nameInput = formEditProfile.name;
 const jobInput = formEditProfile.description;
 
+popupTypeEdit.classList.add("popup_is-animated");
+popupTypeNewCard.classList.add("popup_is-animated");
+popupTypeImage.classList.add("popup_is-animated");
+
 function newPlaceFormSubmit(evt) {
   evt.preventDefault();
   const nameInput = formNewPlace["place-name"];
