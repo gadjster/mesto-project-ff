@@ -1,5 +1,4 @@
-export { createCard, removeCard, likeCard };
-import { openPopup, closePopup } from "./modal.js";
+export { createCard, removeCard, likeCard, cardList };
 export const initialCards = [
   {
     name: "Архыз",
@@ -42,12 +41,15 @@ function createCard(item, removeCard, likeCard, openImage) {
   cardImage.src = item.link;
   cardImage.alt = item.name;
   cardElement.querySelector(".card__title").textContent = item.name;
-  deleteButton.addEventListener("click", () => {
-    removeCard(deleteButton);
-  });
-  cardLikeBtn.addEventListener("click", (evt) => {
-    likeCard(evt);
-  });
+
+  // Убедитесь, что обработчики событий добавляются только один раз
+  deleteButton.removeEventListener("click", () => removeCard(deleteButton));
+  deleteButton.addEventListener("click", () => removeCard(deleteButton));
+
+  cardLikeBtn.removeEventListener("click", (evt) => likeCard(evt));
+  cardLikeBtn.addEventListener("click", (evt) => likeCard(evt));
+
+  cardImage.removeEventListener("click", () => openImage(cardImage));
   cardImage.addEventListener("click", () => openImage(cardImage));
 
   return cardElement;
@@ -58,16 +60,6 @@ function removeCard(deleteButton) {
   deleteCard.remove();
 }
 
-// @todo: Вывести карточки на страницу
-function addCard(item, removeCard, likeCard, openImage) {
-  const cardElement = createCard(item, removeCard, likeCard, openImage);
-  cardList.append(cardElement);
-}
-
-for (let i = 0; i < initialCards.length; i++) {
-  addCard(initialCards[i], removeCard, likeCard, openImage);
-}
-
 function likeCard(evt) {
   const likePlaced = evt.target;
   if (!likePlaced.classList.contains("card__like-button_is-active")) {
@@ -75,24 +67,4 @@ function likeCard(evt) {
   } else {
     likePlaced.classList.remove("card__like-button_is-active");
   }
-}
-
-const image = document.querySelector(".popup_type_image");
-const imagePopup = document.querySelector(".popup__image");
-const captionPopup = document.querySelector(".popup__caption");
-const imagePopupClose = image.querySelector(".popup__close");
-
-function openImage(cardData) {
-  imagePopup.src = cardData.src;
-  imagePopup.alt = cardData.alt;
-  captionPopup.textContent = cardData.alt;
-  openPopup(image);
-  imagePopupClose.addEventListener("click", () => {
-    closePopup(image);
-  });
-  image.addEventListener("click", (evt) => {
-    if (evt.currentTarget === evt.target) {
-      closePopup(image);
-    }
-  });
 }
