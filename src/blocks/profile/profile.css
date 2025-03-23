@@ -1,12 +1,12 @@
-@import url('./__description/profile__description.css');
-@import url('./__add-button/profile__add-button.css');
-@import url('./__edit-button/profile__edit-button.css');
-@import url('./__info/profile__info.css');
-@import url('./__title/profile__title.css');
-@import url('./__image/profile__image.css');
+@import url("./__description/profile__description.css");
+@import url("./__add-button/profile__add-button.css");
+@import url("./__edit-button/profile__edit-button.css");
+@import url("./__info/profile__info.css");
+@import url("./__title/profile__title.css");
+@import url("./__image/profile__image.css");
 
 .profile {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   color: #fff;
   display: flex;
   align-items: center;
@@ -19,4 +19,28 @@
     flex-direction: column;
     text-align: center;
   }
+}
+
+.profile__image-container {
+  position: relative;
+  margin-right: 30px;
+}
+
+.profile__image-edit-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8) url("../../images/edit-icon.svg") center
+    no-repeat;
+  background-size: 26px 26px;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+
+.profile__image-container:hover .profile__image-edit-button {
+  opacity: 1;
 }
