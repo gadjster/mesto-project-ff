@@ -1,8 +1,8 @@
 // Конфигурация API
 const config = {
-  baseUrl: "https://nomoreparties.co/v1/cohort-69",
+  baseUrl: "https://nomoreparties.co/v1/pwff-cohort-1",
   headers: {
-    authorization: "c56e30dc-2883-4270-a59e-b2f7bae969c6",
+    authorization: "8e9c2a8f-377b-4697-beba-d15e65ebdb6a",
     "Content-Type": "application/json",
   },
 };

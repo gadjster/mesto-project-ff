@@ -1,5 +1,5 @@
 import "./pages/index.css";
-import { createCard, removeCard, cardList } from "./components/card.js";
+import { createCard, removeCard } from "./components/card.js";
 import { openPopup, closePopup } from "./components/modal.js";
 import { enableValidation, clearValidation } from "./components/validation.js";
 import {
@@ -42,6 +42,7 @@ const profileSaveButton = profileForm.querySelector(".popup__button");
 const newCardSaveButton = newCardForm.querySelector(".popup__button");
 const avatarSaveButton = avatarForm.querySelector(".popup__button");
 const deleteCardButton = deleteCardForm.querySelector(".popup__button");
+const cardList = document.querySelector(".places__list");
 
 // Переменная для хранения ID текущего пользователя
 let userId;
@@ -84,7 +85,7 @@ avatarPopup.classList.add("popup_is-animated");
 deleteCardPopup.classList.add("popup_is-animated");
 
 // Функция для закрытия попапа при клике на оверлей или крестик
-function setCloseListeners(popup) {
+function setCloseListener(popup) {
   popup.addEventListener("click", (evt) => {
     if (
       evt.target === evt.currentTarget ||
@@ -96,11 +97,11 @@ function setCloseListeners(popup) {
 }
 
 // Добавляем обработчики закрытия для всех попапов
-setCloseListeners(profileEditPopup);
-setCloseListeners(newCardPopup);
-setCloseListeners(imageViewPopup);
-setCloseListeners(avatarPopup);
-setCloseListeners(deleteCardPopup);
+setCloseListener(profileEditPopup);
+setCloseListener(newCardPopup);
+setCloseListener(imageViewPopup);
+setCloseListener(avatarPopup);
+setCloseListener(deleteCardPopup);
 
 // Функция для изменения текста кнопки сохранения
 function renderLoading(button, isLoading, originalText = "Сохранить") {

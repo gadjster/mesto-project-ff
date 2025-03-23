@@ -1,6 +1,3 @@
-// Регулярное выражение для проверки имени и описания
-const nameRegex = /^[а-яА-ЯёЁa-zA-Z\s-]+$/;
-
 // Функции для валидации форм
 function showInputError(formElement, inputElement, errorMessage, config) {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
@@ -22,24 +19,14 @@ function hideInputError(formElement, inputElement, config) {
 
 function checkInputValidity(formElement, inputElement, config) {
   if (!inputElement.validity.valid) {
-    // Проверка на соответствие регулярному выражению для имени и описания
+    // Используем кастомное сообщение об ошибке для pattern если оно есть
     if (
-      inputElement.name === "name" ||
-      inputElement.name === "description" ||
-      inputElement.name === "place-name"
+      inputElement.validity.patternMismatch &&
+      inputElement.dataset.errorMessage
     ) {
-      if (
-        !nameRegex.test(inputElement.value) &&
-        inputElement.value.length > 0
-      ) {
-        // Используем кастомное сообщение из data-error-message
-        const customErrorMessage =
-          inputElement.dataset.errorMessage ||
-          "Разрешены только латинские, кириллические буквы, знаки дефиса и пробелы";
-        inputElement.setCustomValidity(customErrorMessage);
-      } else {
-        inputElement.setCustomValidity("");
-      }
+      inputElement.setCustomValidity(inputElement.dataset.errorMessage);
+    } else {
+      inputElement.setCustomValidity("");
     }
 
     showInputError(
