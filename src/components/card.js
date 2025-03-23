@@ -32,7 +32,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 const cardList = document.querySelector(".places__list");
 
 // @todo: Функция создания карточки
-function createCard(item, removeCard, likeCard, openImage) {
+function createCard(item, removeCard, likeCard) {
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
   const deleteButton = cardElement.querySelector(".card__delete-button");
   const cardImage = cardElement.querySelector(".card__image");
@@ -42,15 +42,9 @@ function createCard(item, removeCard, likeCard, openImage) {
   cardImage.alt = item.name;
   cardElement.querySelector(".card__title").textContent = item.name;
 
-  // Убедитесь, что обработчики событий добавляются только один раз
-  deleteButton.removeEventListener("click", () => removeCard(deleteButton));
+  // Добавляем обработчики событий
   deleteButton.addEventListener("click", () => removeCard(deleteButton));
-
-  cardLikeBtn.removeEventListener("click", (evt) => likeCard(evt));
   cardLikeBtn.addEventListener("click", (evt) => likeCard(evt));
-
-  cardImage.removeEventListener("click", () => openImage(cardImage));
-  cardImage.addEventListener("click", () => openImage(cardImage));
 
   return cardElement;
 }
